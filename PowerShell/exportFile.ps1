@@ -1,7 +1,7 @@
 cls
 
 $mydate = Get-Date
-write-host "Starting AEIS:" $mydate.ToShortDateString()  $mydate.ToShortTimeString()
+write-host "Starting:" $mydate.ToShortDateString()  $mydate.ToShortTimeString()
 
 Add-PSSnapin Microsoft.Sharepoint.Powershell
 $splList =(Get-Spweb "http://myserver/sysite/").GetList("http://myserver/sysite/list")
@@ -54,40 +54,31 @@ New-Item $filenam -type file
 #$stringBuilder = New-Object System.Text.StringBuilder
 foreach ($item in $splListItems)
 {
-    #write-host "ID:" $item.ID "ΚωδικόςΑΕΙΣ: " $item["ΚωδικόςΑΕΙΣ"]  "CDI Πελάτη:" $item["CDI Πελάτη"] "ΑΦΜ:" $item["ΑΦΜ"]
-    #write-host "Νόμισμα" $item["Νόμισμα"] "Ποσό Παραστατικού" $item["Ποσό Παραστατικού"] "epitropi" $item["epitropi"]
-    #write-host "Ημερομηνία Εγκρίσεως ΥΕΤΣ:" $item["Ημερομηνία Εγκρίσεως ΥΕΤΣ"] "Ημερομηνία Απόφασης ΕΕΤΣ:" $item["Ημερομηνία Απόφασης ΕΕΤΣ"]
+    #write-host "ID:" $item.ID "ccc: " $item["ccc"] 
     #write-host "-------------"
    	#$obj = New-Object PSObject -Property @{
-         #"ΚωδικόςΑΕΙΣ"= $item["ΚωδικόςΑΕΙΣ"] 
-         #"CDI Πελάτη" = $item["CDI Πελάτη"]
-         #"ΑΦΜ"= $item["ΑΦΜ"]
-         #"Νόμισμα"= $item["Νόμισμα"]
-         #"Ποσό Παραστατικού"= $item["Ποσό Παραστατικού"] 
-         #"EE.YY"= $item["epitropi"]						
+         #"ccc"= $item["ccc"] 
 	#}
 	#$exportlist += $obj
-    $line=$item["ΚωδικόςΑΕΙΣ"]+$sp+$item["ΑΦΜ"]+$sp+$item["Νόμισμα"]+$sp+$item["Ποσό Παραστατικού"]+$sp+$item["epitropi"]
-    #write-host $line  $item["status ΔΠΧΠ"] 
-    #write-host $line $item["status ΔΠΧΠ"] $item["EgkrisiYETSDate"] $item["LipsiApofasisEETSDate"] 
+    $line=$item["cc"]+$sp+$item["bb"]
     $line | Out-File $filenam -Append
 } 
-#$exportlist | select * | Export-Csv -Encoding:UTF8 -path 'D:\Safedeposits\pnpdemands\export.csv' -noType
+#$exportlist | select * | Export-Csv -Encoding:UTF8 -path $filenam -noType
  
-$users = "nikolaos.klavdianos@alpha.gr,serafeim.kroustallis@alpha.gr" # List of users to email your report to (separate by comma)
-$fromemail = "dms_admin@alpha.gr"
-$server = "10.29.23.50" #enter your own SMTP server DNS name / IP address here
-$smtpServer = "10.29.23.50"
+$users = "c@e.com,a@b" # List of users to email your report to (separate by comma)
+$fromemail = "admin@domain.gr"
+$server = "9999.9999" #enter your own SMTP server DNS name / IP address here
+$smtpServer = "99.2222"
 $att = new-object Net.Mail.Attachment($filenam)
 $msg = new-object Net.Mail.MailMessage
 $smtp = new-object Net.Mail.SmtpClient($smtpServer)
-$msg.From = "dms_admin@alpha.gr"
-$msg.To.Add("nikolaos.klavdianos@alpha.gr,serafeim.kroustallis@alpha.gr")
-$msg.Subject = "PNP Demands Export"
-$msg.Body = "Attached is the PNPDemands CSV"
+$msg.From = "from@domain.gr"
+$msg.To.Add("a@k,c@k")
+$msg.Subject = "Subject"
+$msg.Body = "Attached is the  CSV"
 $msg.Attachments.Add($att)
 $smtp.Send($msg)
 $att.Dispose()
 
 $mydate = Get-Date
-write-host "Completed AEIS:" $mydate.ToShortDateString()  $mydate.ToShortTimeString()
+write-host "Completed:" $mydate.ToShortDateString()  $mydate.ToShortTimeString()
